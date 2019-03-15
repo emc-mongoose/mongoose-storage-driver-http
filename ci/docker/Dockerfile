@@ -10,8 +10,8 @@ ADD settings.gradle ./settings.gradle
 
 RUN ./gradlew clean jar
 
-FROM emcmongoose/mongoose-storage-driver-coop:${BASE_VERSION}
+FROM emcmongoose/mongoose-storage-driver-netty:${BASE_VERSION}
 
 ARG BASE_VERSION
 
-COPY --from=build /build/libs/mongoose-storage-driver-netty-*.jar $HOME/.mongoose/${BASE_VERSION}/ext/
+COPY --from=build /build/libs/mongoose-storage-driver-http-*.jar $HOME/.mongoose/${BASE_VERSION}/ext/
