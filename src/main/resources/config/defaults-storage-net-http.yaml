@@ -7,6 +7,6 @@ storage:
       headers:
         Connection: Keep-Alive
         Date: "#{date:formatNowRfc1123()}%{date:formatNowRfc1123()}"
-        User-Agent: "mongoose-storage-driver-http/4.2.0"
+        User-Agent: "mongoose-storage-driver-http/4.2.1"
       uri:
         args: {}
