@@ -16,6 +16,5 @@ ARG VERSION
 RUN mkdir -p $HOME/.mongoose/${BASE_VERSION}/ext
 COPY --from=0 /build/libs/mongoose-storage-driver-http-${VERSION}.jar /tmp/
 RUN mv -f /tmp/mongoose-storage-driver-http-*.jar $HOME/.mongoose/${BASE_VERSION}/ext/ \
-    && chmod +x /opt/mongoose/entrypoint_storage_driver_http.sh \
     && curl http://repo.maven.apache.org/maven2/com/github/emc-mongoose/mongoose-storage-driver-coop/${STORAGE_DRIVER_COOP_VERSION}/mongoose-storage-driver-coop-${STORAGE_DRIVER_COOP_VERSION}.jar -o $HOME/.mongoose/${BASE_VERSION}/ext/mongoose-storage-driver-coop.jar \
     && curl http://repo.maven.apache.org/maven2/com/github/emc-mongoose/mongoose-storage-driver-netty/${STORAGE_DRIVER_NETTY_VERSION}/mongoose-storage-driver-netty-${STORAGE_DRIVER_NETTY_VERSION}.jar -o $HOME/.mongoose/${BASE_VERSION}/ext/mongoose-storage-driver-netty.jar \
