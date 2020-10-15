@@ -4,5 +4,8 @@ storage:
   net:
     http:
       headers: map
+      read:
+        metadata:
+          only: boolean
       uri:
         args: map
