@@ -85,6 +85,7 @@ public abstract class HttpStorageDriverBase<I extends Item, O extends Operation<
 	protected final Map<String, String> dynamicHeaders = new HashMap<>();
 	private final Input<String> uriQueryInput;
 	protected final ChannelFutureListener httpReqSentCallback = this::sendHttpRequestComplete;
+	protected final boolean readMetadataOnly;
 
 	protected HttpStorageDriverBase(
 					final String testStepId,
@@ -109,6 +110,10 @@ public abstract class HttpStorageDriverBase<I extends Item, O extends Operation<
 			} else {
 				sharedHeaders.add(headerKey, headerValue);
 			}
+		}
+		this.readMetadataOnly = httpConfig.boolVal("read-metadata-only");
+		if (readMetadataOnly) {
+			Loggers.MSG.info("Reading metadata only (HEAD requests)");
 		}
 		final var uriArgs = httpConfig.<String> mapVal("uri-args");
 		final var uriQueryExpr = uriArgs.entrySet().stream()
@@ -242,7 +247,7 @@ public abstract class HttpStorageDriverBase<I extends Item, O extends Operation<
 	protected HttpMethod dataHttpMethod(final OpType opType) {
 		switch (opType) {
 		case READ:
-			return HttpMethod.GET;
+			return readMetadataOnly ? HttpMethod.HEAD : HttpMethod.GET;
 		case DELETE:
 			return HttpMethod.DELETE;
 		default:

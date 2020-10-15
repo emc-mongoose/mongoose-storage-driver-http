@@ -8,5 +8,8 @@ storage:
         Connection: Keep-Alive
         Date: "#{date:formatNowRfc1123()}%{date:formatNowRfc1123()}"
         User-Agent: "mongoose-storage-driver-http/4.2.6"
+      read:
+        metadata:
+          only: false
       uri:
         args: {}
