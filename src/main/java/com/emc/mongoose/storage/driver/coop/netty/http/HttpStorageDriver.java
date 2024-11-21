@@ -13,7 +13,6 @@ public interface HttpStorageDriver<I extends Item, O extends Operation<I>>
 
 	int REQ_LINE_LEN = 1024;
 	int HEADERS_LEN = 2048;
-	int CHUNK_SIZE = 8192;
 
 	String KEY_CONTENT = "content";
 }

@@ -86,6 +86,7 @@ public abstract class HttpStorageDriverBase<I extends Item, O extends Operation<
 	private final Input<String> uriQueryInput;
 	protected final ChannelFutureListener httpReqSentCallback = this::sendHttpRequestComplete;
 	protected final boolean readMetadataOnly;
+	protected final int maxChunkSize;
 
 	protected HttpStorageDriverBase(
 					final String testStepId,
@@ -115,6 +116,7 @@ public abstract class HttpStorageDriverBase<I extends Item, O extends Operation<
 		if (readMetadataOnly) {
 			Loggers.MSG.info("Reading metadata only (HEAD requests)");
 		}
+		this.maxChunkSize = httpConfig.intVal("max-chunk-size");
 		final var uriArgs = httpConfig.<String> mapVal("uri-args");
 		final var uriQueryExpr = uriArgs.entrySet().stream()
 						.map(entry -> entry.getKey() + '=' + entry.getValue())
@@ -178,7 +180,7 @@ public abstract class HttpStorageDriverBase<I extends Item, O extends Operation<
 		super.appendHandlers(channel);
 		channel
 						.pipeline()
-						.addLast(new HttpClientCodec(REQ_LINE_LEN, HEADERS_LEN, CHUNK_SIZE, true))
+						.addLast(new HttpClientCodec(REQ_LINE_LEN, HEADERS_LEN, maxChunkSize, true))
 						.addLast(new ChunkedWriteHandler());
 	}
 

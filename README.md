@@ -14,7 +14,8 @@
 |:-----------------------------------------------|:-------------|:-----------------|:-------------------------------------------------|
 | storage-net-http-headers                       | Map          | { "Connection" : "keep-alive", "Date": "#{date:formatNowRfc1123()}%{date:formatNowRfc1123()}", "User-Agent" : "mongoose-storage-driver-http/4.2.6" } | Custom HTTP headers section. A user may place here a key-value pair which will be used as HTTP header. The headers will be appended to every HTTP request issued.
 | storage-net-http-uri-args                      | Map          | {}               | Custom URI query arguments according [RFC 2396](http://www.ietf.org/rfc/rfc2396.txt).The headers will be appended to every HTTP request issued.
-| storage-net-http-read-metadata-only            | Map          | false            | specifies whether Mongoose issues GET request or HEAD. HEAD is used when enabled.
+| storage-net-http-read-metadata-only            | Map          | false            | Specifies whether Mongoose issues GET request or HEAD. HEAD is used when enabled.
+| storage-net-http-max-chunk-size                | Integer      | 65536            | The limit, in bytes, at which Netty will send a chunk down the pipeline.
 
 ## 2. Custom HTTP Headers
 
