@@ -13,3 +13,6 @@ storage:
           only: false
       uri:
         args: {}
+      max:
+        chunk:
+          size: 65536
