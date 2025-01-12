@@ -239,7 +239,7 @@ public abstract class HttpStorageDriverBase<I extends Item, O extends Operation<
 			httpHeaders.set(HttpHeaderNames.CONTENT_LENGTH, 0);
 			break;
 		}
-		applyChecksum(op, httpHeaders);
+		applyChecksum(httpHeaders, op);
 		applyMetaDataHeaders(httpHeaders);
 		applyDynamicHeaders(httpHeaders);
 		applySharedHeaders(httpHeaders);
@@ -383,7 +383,7 @@ public abstract class HttpStorageDriverBase<I extends Item, O extends Operation<
 		return uriQueryInput.get();
 	}
 
-	protected abstract void applyChecksum(final O op, final HttpHeaders httpHeaders);
+	protected abstract void applyChecksum(final HttpHeaders httpHeaders, final O op);
 
 	protected abstract void applyMetaDataHeaders(final HttpHeaders httpHeaders);
 
